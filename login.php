@@ -12,9 +12,9 @@
 <body>
     <?php
     $users = [
-        'longdangcap'=>'123456',
-        'longdangcap1'=>'12345678',
-        'longdangcap2'=>'1234567'
+        'user1'=>'123456',
+        'user2'=>'12345678',
+        'admin'=>'1234567'
     ];
     // Biến để lưu thông báo
 $message = '';
