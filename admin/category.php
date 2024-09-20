@@ -58,7 +58,7 @@
                     <tbody>
                         <!-- PHP hiển thị danh sách thể loại -->
                         <?php
-                        include 'db.php'; // Kết nối CSDL
+                        include '../db.php'; // Kết nối CSDL
 
                         // Truy vấn lấy danh sách thể loại
                         $sql = "SELECT ma_tloai, ten_tloai FROM theloai";

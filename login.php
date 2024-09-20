@@ -16,14 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        // So sánh mật khẩu (đã được mã hóa)
-        if (password_verify($password, $user['password'])) {
+        // So sánh mật khẩu (không mã hóa)
+        if ($password === $user['password']) {
             $message = 'Đăng nhập thành công!';
         } else {
             $message = 'Sai mật khẩu!';
         }
-    } else {
-        $message = 'Không tìm thấy người dùng!';
     }
 
     $stmt->close();
@@ -31,6 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 $conn->close();
 ?>
+
+<?php if ($message): ?>
+    <script>alert("<?php echo $message; ?>");</script>
+<?php endif; ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,30 +47,6 @@ $conn->close();
     <link rel="stylesheet" href="css/style_login.css">
 </head>
 <body>
-<?php
-    $users = [
-        'user1'=>'123456',
-        'user2'=>'12345678',
-        'admin'=>'1234567'
-    ];
-    // Biến để lưu thông báo
-$message = '';
-
-// Kiểm tra xem form đã được gửi hay chưa
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    // Kiểm tra thông tin đăng nhập
-    if (array_key_exists($username, $users) && $users[$username] === $password) {
-        $message = 'Đăng nhập thành công!';
-    } else {
-        $message = 'Tên đăng nhập hoặc mật khẩu không chính xác.';
-    
-
-    }
-}
-    ?>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">

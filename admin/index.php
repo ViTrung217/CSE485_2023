@@ -77,7 +77,7 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                        155
+                        <?php echo $count_users; ?>
                         </h5>
                     </div>
                 </div>
