@@ -1,3 +1,37 @@
+<?php
+include 'db.php'; // Kết nối CSDL
+
+$message = ''; // Biến lưu thông báo
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Truy vấn để tìm user theo username
+    $sql = "SELECT * FROM users WHERE username = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        // So sánh mật khẩu (đã được mã hóa)
+        if (password_verify($password, $user['password'])) {
+            $message = 'Đăng nhập thành công!';
+        } else {
+            $message = 'Sai mật khẩu!';
+        }
+    } else {
+        $message = 'Không tìm thấy người dùng!';
+    }
+
+    $stmt->close();
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +44,7 @@
     <link rel="stylesheet" href="css/style_login.css">
 </head>
 <body>
-    <?php
+<?php
     $users = [
         'user1'=>'123456',
         'user2'=>'12345678',
@@ -62,7 +96,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </nav>
     </header>
-<main class="container mt-5 mb-5">
+
+    <main class="container mt-5 mb-5">
         <div class="d-flex justify-content-center h-100">
             <div class="card">
                 <div class="card-header">
@@ -97,8 +132,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </form>
                 </div>
                 <div class="card-footer">
-                    <div class="d-flex justify-content-center ">
-                        Bạn chưa có tài khoản?<a href="#" class="text-warning text-decoration-none">Đăng ký</a>
+                    <div class="d-flex justify-content-center">
+                        Bạn chưa có tài khoản?<a href="#" class="text-warning text-decoration-none"> Đăng ký</a>
                     </div>
                     <div class="d-flex justify-content-center">
                         <a href="#" class="text-warning text-decoration-none">Quên mật khẩu?</a>
@@ -111,12 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <footer class="bg-white d-flex justify-content-center align-items-center border-top border-secondary border-2" style="height:80px">
         <h4 class="text-center text-uppercase fw-bold">TLU's music garden</h4>
     </footer>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script>
-    <?php if ($message): ?>
-        alert("<?php echo $message; ?>");
-    <?php endif; ?>
-</script>
 </body>
 </html>
