@@ -10,6 +10,43 @@
     <link rel="stylesheet" href="css/style_login.css">
 </head>
 <body>
+<?php
+        include '../db.php';
+
+        if (isset($_GET['id'])) {
+            $author_id = $_GET['id'];
+
+            // Fetch category details from the database
+            $sql = "SELECT * FROM tacgia WHERE ma_tgia = $author_id";
+            $result = mysqli_query($conn, $sql);
+            $author = mysqli_fetch_assoc($result);
+
+            if (!$author) {
+                echo "KHÔNG TÌM THẤY TÁC GIẢ!";
+                exit;
+            }
+        }
+
+        // Check if the form has been submitted
+        if (isset($_POST['txtCatId']) && isset($_POST['txtCatName'])) {
+            $author_id = $_POST['txtCatId'];
+            $author_name = $_POST['txtCatName'];
+        
+            // Update query
+            $sql = "UPDATE tacgia SET ten_tgia = '$author_name' WHERE ma_tgia = $author_id";
+        
+            if (mysqli_query($conn, $sql)) {
+                echo "CẬP NHẬT THÀNH CÔNG.";
+                header("Location: author.php");
+                exit();
+            } else {
+                echo "LỖI CẬP NHẬT: " . mysqli_error($conn);
+            }
+        }
+
+        // Close the connection
+        mysqli_close($conn);
+    ?>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
@@ -28,10 +65,10 @@
                         <a class="nav-link" href="../index.php">Trang ngoài</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold" href="category.php">Thể loại</a>
+                        <a class="nav-link " href="category.php">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="author.php">Tác giả</a>
+                        <a class="nav-link active fw-bold" href="author.php">Tác giả</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="article.php">Bài viết</a>
@@ -46,15 +83,15 @@
         <div class="row">
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Sửa thông tin tác giả</h3>
-                <form action="process_add_category.php" method="post">
+                <form action="edit_author.php?id=<?php echo $author['ma_tgia']; ?>" method="post">
                 <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatId">Mã tác giả</span>
-                        <input type="text" class="form-control" name="txtCatId" readonly value="1">
+                        <input type="text" class="form-control" name="txtCatId" readonly value="<?php echo $author['ma_tgia']; ?>">
                     </div>
 
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatName">Tên tác giả</span>
-                        <input type="text" class="form-control" name="txtCatName" value = "Nhập tên tác giả">
+                        <input type="text" class="form-control" name="txtCatName" value = "<?php echo $author['ten_tgia']; ?>">
                     </div>
 
                     <div class="form-group  float-end ">

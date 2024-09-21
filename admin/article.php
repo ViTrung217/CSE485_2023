@@ -10,6 +10,21 @@
     <link rel="stylesheet" href="css/style_login.css">
 </head>
 <body>
+    <?php 
+    include '../db.php';//đường dẫn tương đối (giúp mã linh hoạt hơn và tránh lỗi dù có bị di chuyển giữa các máy có cấu hình khác nhau)
+
+    $sql = "SELECT * FROM baiviet";
+    $result = $conn->query($sql);
+
+// if ($result->num_rows > 0) {
+//     // Xuất dữ liệu cho mỗi hàng nếu dữ liệu 
+//     while($row = $result->fetch_assoc()) {
+//         echo  " - Tên: " . $row["tieude"] . "<br>";
+//     }
+// } else {
+//     echo "0 kết quả";
+// }
+    ?>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
@@ -28,59 +43,83 @@
                         <a class="nav-link" href="../index.php">Trang ngoài</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold" href="category.php">Thể loại</a>
+                        <a class="nav-link " href="category.php">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="author.php">Tác giả</a>
+                        <a class="nav-link " href="author.php">Tác giả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="article.php">Bài viết</a>
+                        <a class="nav-link active fw-bold" href="article.php">Bài viết</a>
                     </li>
                 </ul>
                 </div>
             </div>
         </nav>
-
     </header>
+
     <main class="container mt-5 mb-5">
+        <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
-                <a href="add_category.php" class="btn btn-success">Thêm mới</a>
+                <a href="add_article.php" class="btn btn-success">Thêm mới</a>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tên thể loại</th>
+                            <th scope="col">STT</th>
+                            <th scope="col">Tiêu đề</th>
+                            <th scope="col">Tên bài hát</th>
+                            <!-- <th scope="col">Mã thể loại</th> -->
+                            <th scope="col">Tóm tắt</th>
+                            <th scope="col">Nội dung</th>
+                            <th scope="col">Mã tác giả</th>
+                            <th scope="col">Ngày viết</th>
+                            <th scope="col">Hình ảnh</th>
+                            
                             <th>Sửa</th>
                             <th>Xóa</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- PHP hiển thị danh sách thể loại -->
-                        <?php
-                        include '../db.php'; // Kết nối CSDL
+                    <?php
+        if ($result) {
+            if ($result->num_rows > 0) {
+                // Biến đếm cho cột #
+                
 
-                        // Truy vấn lấy danh sách thể loại
-                        $sql = "SELECT ma_tloai, ten_tloai FROM theloai";
-                        $result = $conn->query($sql);
+                // Xuất dữ liệu cho mỗi hàng
+                while ($row = $result->fetch_assoc()) {
+                    echo '<tr>';
+                    //echo '<td>' . $stt++ . '</td>'; // Số thứ tự
+                    echo '<td>' . $row["ma_bviet"] . '</td>'; // Cột #
+                    echo '<td>' . htmlspecialchars($row["tieude"]) . '</td>'; // Tiêu đề
+                    echo '<td>' . htmlspecialchars($row["ten_bhat"]) . '</td>'; // Tên bài hát
+                    echo '<td>' . htmlspecialchars($row["tomtat"]) . '</td>'; // Tóm tắt
+                    echo '<td>' . htmlspecialchars($row["noidung"]) . '</td>'; // Nội dung
+                    echo '<td>' . htmlspecialchars($row["ma_tgia"]) . '</td>'; // Mã tác giả
+                    echo '<td>' . htmlspecialchars($row["ngayviet"]) . '</td>'; // Ngày viết
+                    echo '<td><img src="' . htmlspecialchars($row["hinhanh"]) . '" alt="Hình ảnh" width="100"></td>'; // Hình ảnh
+                    echo '<td><a href="edit_article.php?id='  . $row["ma_bviet"] . '"><i class="fa-solid fa-pen-to-square"> </i></a></td>'; // Sửa
+                    echo ' <td>
+                                <a href="delete_article.php?id='. $row["ma_bviet"] . '"><i class="fa-solid fa-trash"></i></a>
+                            </td>'; // Xóa
+                    echo '</tr>';
+                }
+            } else {
+                echo '<tr><td colspan="10">Không có dữ liệu</td></tr>'; // Không có dữ liệu
+            }
+        } else {
+            echo '<tr><td colspan="10">Lỗi: ' . $conn->error . '</td></tr>'; // Xuất lỗi nếu có
+        }
 
-                        if ($result->num_rows > 0) {
-                            // Hiển thị thể loại
-                            while($row = $result->fetch_assoc()) {
-                                echo "<tr>";
-                                echo "<td>" . $row['ma_tloai'] . "</td>";
-                                echo "<td>" . $row['ten_tloai'] . "</td>";
-                                echo "<td><a href='edit_category.php?id=" . $row['ma_tloai'] . "'><i class='fa-solid fa-pen-to-square'></i></a></td>";
-                                echo "<td><a href='delete_category.php?id=" . $row['ma_tloai'] . "'><i class='fa-solid fa-trash'></i></a></td>";
-                                echo "</tr>";
-                            }
-                        } else {
-                            echo "<tr><td colspan='4'>Không có thể loại nào.</td></tr>";
-                        }
-                        ?>
-                    </tbody>
+        $conn->close(); // Đóng kết nối
+        ?>
+        
                 </table>
             </div>
+            <?php 
+        if(isset($_GET['delete_msg'])){
+            echo "<h6>" . $_GET['delete_msg'] . "</h6>";
+        }
+        ?>
         </div>
     </main>
     <footer class="bg-white d-flex justify-content-center align-items-center border-top border-secondary  border-2" style="height:80px">

@@ -70,8 +70,8 @@
                                 echo "<tr>";
                                 echo "<td>" . $row['ma_tloai'] . "</td>";
                                 echo "<td>" . $row['ten_tloai'] . "</td>";
-                                echo "<td><a href='edit_category.php?id=" . $row['ma_tloai'] . "'><i class='fa-solid fa-pen-to-square'></i></a></td>";
-                                echo "<td><a href='del_category.php?id=" . $row['ma_tloai'] . "'><i class='fa-solid fa-trash'></i></a></td>";
+                                echo '<td><a href="edit_category.php?id=' . $row['ma_tloai'] . '"><i class="fa-solid fa-pen-to-square"></i></a></td>';
+                                echo '<td><a href="del_category.php?id=' . $row['ma_tloai'] . '" onclick="return confirm(\'BẠN CHẮC XÓA THỂ LOẠI NÀY CHỨ?\')"><i class="fa-solid fa-trash"></i></a></td>';
                                 echo "</tr>";
                             }
                         } else {

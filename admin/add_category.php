@@ -28,7 +28,7 @@
                     // Execute the prepared statement
                     if ($stmt->execute()) {
                         // Redirect to the category list page with a success message
-                        header("Location: category.php?msg=success");
+                        header("Location:category.php?msg=success");
                         exit();
                     } else {
                         // If there is an error, display it
