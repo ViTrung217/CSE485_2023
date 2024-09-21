@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 19, 2024 lúc 09:22 AM
+-- Thời gian đã tạo: Th9 21, 2024 lúc 10:01 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -109,6 +109,34 @@ INSERT INTO `theloai` (`ma_tloai`, `ten_tloai`) VALUES
 (7, 'Rock'),
 (8, 'R&B');
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`) VALUES
+(1, 'user1', 'password1'),
+(2, 'user2', 'password2'),
+(3, 'user3', 'password3'),
+(4, 'user4', 'password4'),
+(5, 'user5', 'password5'),
+(6, 'user6', 'password6'),
+(7, 'user7', 'password7'),
+(8, 'user8', 'password8'),
+(9, 'user9', 'password9'),
+(10, 'admin1', 'password10');
+
 --
 -- Chỉ mục cho các bảng đã đổ
 --
@@ -132,6 +160,23 @@ ALTER TABLE `tacgia`
 --
 ALTER TABLE `theloai`
   ADD PRIMARY KEY (`ma_tloai`);
+
+--
+-- Chỉ mục cho bảng `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
