@@ -91,10 +91,8 @@ DELIMITER ;
 
 l. Bổ sung thêm bảng Users để lưu thông tin Tài khoản đăng nhập và sử dụng cho chức năng 
 Đăng nhập/Quản trị trang web
-CREATE TABLE Users (
-    user_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,  -- Để lưu mật khẩu đã mã hóa
-    email VARCHAR(100),
-    role ENUM('admin', 'user') DEFAULT 'user'
-);
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
