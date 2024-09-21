@@ -45,11 +45,11 @@
     <main class="container mt-5 mb-5">
         <div class="row">
             <div class="col-sm">
-                <a href="add_category.php" class="btn btn-success">Thêm mới</a>
+                <a href="./add_category.php" class="btn btn-success">Thêm mới</a>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">STT</th>
                             <th scope="col">Tên thể loại</th>
                             <th>Sửa</th>
                             <th>Xóa</th>
@@ -71,7 +71,7 @@
                                 echo "<td>" . $row['ma_tloai'] . "</td>";
                                 echo "<td>" . $row['ten_tloai'] . "</td>";
                                 echo "<td><a href='edit_category.php?id=" . $row['ma_tloai'] . "'><i class='fa-solid fa-pen-to-square'></i></a></td>";
-                                echo "<td><a href='delete_category.php?id=" . $row['ma_tloai'] . "'><i class='fa-solid fa-trash'></i></a></td>";
+                                echo "<td><a href='del_category.php?id=" . $row['ma_tloai'] . "'><i class='fa-solid fa-trash'></i></a></td>";
                                 echo "</tr>";
                             }
                         } else {

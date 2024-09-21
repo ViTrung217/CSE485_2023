@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,41 +46,18 @@
     <main class="container mt-5 mb-5">
         <div class="row">
             <div class="col-sm">
-                <a href="./add_author.php" class="btn btn-success">Thêm mới</a>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">STT</th>
-                            <th scope="col">Tên tác giả</th>
-                            <th>Sửa</th>
-                            <th>Xóa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- PHP hiển thị danh sách tác giả -->
-                        <?php
-                        include '../db.php'; // Kết nối CSDL
+                <h3 class="text-center text-uppercase fw-bold">Thêm mới tác giả</h3>
+                <form action="process_add_category.php" method="post">
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatName">Tên tác giả</span>
+                        <input type="text" class="form-control" name="txtCatName" >
+                    </div>
 
-                        // Truy vấn lấy danh sách thể loại
-                        $sql = "SELECT ma_tgia, ten_tgia FROM tacgia";
-                        $result = $conn->query($sql);
-
-                        if ($result->num_rows > 0) {
-                            // Hiển thị thể loại
-                            while($row = $result->fetch_assoc()) {
-                                echo "<tr>";
-                                echo "<td>" . $row['ma_tgia'] . "</td>";
-                                echo "<td>" . $row['ten_tgia'] . "</td>";
-                                echo "<td><a href='./edit_author.php?id=" . $row['ma_tgia'] . "'><i class='fa-solid fa-pen-to-square'></i></a></td>";
-                                echo "<td><a href='./del_author.php?id=" . $row['ma_tgia'] . "'><i class='fa-solid fa-trash'></i></a></td>";
-                                echo "</tr>";
-                            }
-                        } else {
-                            echo "<tr><td colspan='4'>Không có tác giả nào.</td></tr>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                    <div class="form-group  float-end ">
+                        <input type="submit" value="Thêm" class="btn btn-success">
+                        <a href="author.php" class="btn btn-warning ">Quay lại</a>
+                    </div>
+                </form>
             </div>
         </div>
     </main>

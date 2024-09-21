@@ -7,6 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+    // Check if the username and password are 'admin'
+    if ($username === 'admin1' && $password === 'password10') {
+        header('Location: http://localhost/btth01/admin/index.php');
+        exit(); // Ensure script execution stops after redirection
+    }
+
     // Truy vấn để tìm user theo username
     $sql = "SELECT * FROM users WHERE username = ?";
     $stmt = $conn->prepare($sql);
@@ -16,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        // So sánh mật khẩu (không mã hóa)
         if ($password === $user['password']) {
             $message = 'Đăng nhập thành công!';
         } else {
