@@ -46,7 +46,7 @@
                     <div class="col-sm-4">
                         <img src="./images/songs/longme.jpg" class="img-fluid" alt="...">
                     </div>
-                        <?php
+                        <?php             
                             $query = "SELECT * FROM baiviet JOIN tacgia ON baiviet.ma_tgia = tacgia.ma_tgia JOIN theloai ON baiviet.ma_tloai = theloai.ma_tloai WHERE ten_bhat = 'Lòng mẹ' ";
                             $result = mysqli_query($conn, $query);
                             if ($result->num_rows > 0) {

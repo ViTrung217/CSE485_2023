@@ -10,19 +10,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     $ma_tgia = $_POST['ma_tgia'];
     $hinhanh = $_POST['hinhanh'];
     $ngayviet = date('D-M-Y');
-    
-    // Tính bảo mật thấp 
-    // $sql = "INSERT INTO baiviet (tieude, ten_bhat,ma_tloai,tomtat,noidung,ma_tgia,ngayviet) Values ('$tieude','$ten_bhat','$ma_tloai','$tomtat','$noidung','$ma_tgia','$ngayviet')";
-    // if($conn->query($sql)===TRUE){
-    //     echo "Bài viết mới đã được thêm !";
-    //     header('Location: index.php'); // Chuyển hướng về trang chính sau khi thêm thành công
-    //     exit;
-    // }
-    // else{
-    //     echo"Error: " . $sql . "<br>" . $conn->error;
-    // }
-
-    // Bảo mật tốt hơn 
+     
     $stmt = $conn->prepare("INSERT INTO baiviet (tieude, ten_bhat, ma_tloai, tomtat, noidung, ma_tgia, ngayviet) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("sssssss", $tieude, $ten_bhat, $ma_tloai, $tomtat, $noidung, $ma_tgia, $ngayviet);
 

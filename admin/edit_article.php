@@ -25,33 +25,6 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-<!-- Form dữ liệu cần chỉnh sửa của bài viết bất kỳ
-<form action="edit_article.php?id=<?php echo $ma_bviet; ?>" method="POST" enctype="multipart/form-data">
-    <label for="tieude">Tiêu đề:</label>
-    <input type="text" name="tieude" value="<?php echo htmlspecialchars($row['tieude']); ?>" required><br>
-
-    <label for="ten_bhat">Tên bài hát:</label>
-    <input type="text" name="ten_bhat" value="<?php echo htmlspecialchars($row['ten_bhat']); ?>" required><br>
-
-    <label for="tomtat">Tóm tắt:</label>
-    <textarea name="tomtat" required><?php echo htmlspecialchars($row['tomtat']); ?></textarea><br>
-
-    <label for="noidung">Nội dung:</label>
-    <textarea name="noidung" required><?php echo htmlspecialchars($row['noidung']); ?></textarea><br>
-
-    <label for="ma_tgia">Mã tác giả:</label>
-    <input type="number" name="ma_tgia" value="<?php echo htmlspecialchars($row['ma_tgia']); ?>" required><br>
-
-    <label for="ngayviet">Ngày viết:</label>
-    <input type="date" name="ngayviet" value="<?php echo htmlspecialchars($row['ngayviet']); ?>" required><br>
-
-    <label for="hinhanh">Hình ảnh:</label>
-    <input type="file" name="hinhanh"><br>
-    <img src="<?php echo htmlspecialchars($row['hinhanh']); ?>" alt="Hình ảnh" width="100"><br>
-
-    <button type="submit" name="update">Cập nhật</button>
-</form> -->
-
 <?php 
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
 

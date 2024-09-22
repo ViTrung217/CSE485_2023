@@ -11,19 +11,11 @@
 </head>
 <body>
     <?php 
-    include '../db.php';//đường dẫn tương đối (giúp mã linh hoạt hơn và tránh lỗi dù có bị di chuyển giữa các máy có cấu hình khác nhau)
+    include '../db.php';
 
     $sql = "SELECT * FROM baiviet";
     $result = $conn->query($sql);
 
-// if ($result->num_rows > 0) {
-//     // Xuất dữ liệu cho mỗi hàng nếu dữ liệu 
-//     while($row = $result->fetch_assoc()) {
-//         echo  " - Tên: " . $row["tieude"] . "<br>";
-//     }
-// } else {
-//     echo "0 kết quả";
-// }
     ?>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
@@ -58,7 +50,6 @@
     </header>
 
     <main class="container mt-5 mb-5">
-        <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
                 <a href="add_article.php" class="btn btn-success">Thêm mới</a>
@@ -68,7 +59,7 @@
                             <th scope="col">STT</th>
                             <th scope="col">Tiêu đề</th>
                             <th scope="col">Tên bài hát</th>
-                            <!-- <th scope="col">Mã thể loại</th> -->
+                            <th scope="col">Mã thể loại</th> 
                             <th scope="col">Tóm tắt</th>
                             <th scope="col">Nội dung</th>
                             <th scope="col">Mã tác giả</th>
@@ -82,13 +73,12 @@
                     <?php
         if ($result) {
             if ($result->num_rows > 0) {
-                // Biến đếm cho cột #
                 
 
                 // Xuất dữ liệu cho mỗi hàng
                 while ($row = $result->fetch_assoc()) {
                     echo '<tr>';
-                    //echo '<td>' . $stt++ . '</td>'; // Số thứ tự
+                    echo '<td>' . $stt++ . '</td>'; 
                     echo '<td>' . $row["ma_bviet"] . '</td>'; // Cột #
                     echo '<td>' . htmlspecialchars($row["tieude"]) . '</td>'; // Tiêu đề
                     echo '<td>' . htmlspecialchars($row["ten_bhat"]) . '</td>'; // Tên bài hát
@@ -104,10 +94,10 @@
                     echo '</tr>';
                 }
             } else {
-                echo '<tr><td colspan="10">Không có dữ liệu</td></tr>'; // Không có dữ liệu
+                echo '<tr><td colspan="10">Không có dữ liệu</td></tr>'; 
             }
         } else {
-            echo '<tr><td colspan="10">Lỗi: ' . $conn->error . '</td></tr>'; // Xuất lỗi nếu có
+            echo '<tr><td colspan="10">Lỗi: ' . $conn->error . '</td></tr>'; 
         }
 
         $conn->close(); // Đóng kết nối
