@@ -15,7 +15,7 @@
             <div class="container-fluid">
                 <div class="my-logo">
                     <a class="navbar-brand" href="#">
-                        <img src="./views/image/logo2.png" alt="" class="img-fluid">
+                        <img src="../views/image/logo2.png" alt="" class="img-fluid">
                     </a>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,10 +24,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.php?controller=home&action=index">Trang chủ</a>
+                    <a class="nav-link active" aria-current="page" href="">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="./login.php">Đăng nhập</a>
+                    <a class="nav-link" href="">Đăng nhập</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
@@ -41,7 +41,7 @@
     <main class="container mt-5">
         <div class="row mb-5">
             <div class="col-sm-4">
-                <img src="./views/image/songs/cayvagio.jpg" class="img-fluid" alt="Cây và gió">
+                <img src="../views/image/songs/cayvagio.jpg" class="img-fluid" alt="Cây và gió">
             </div>
             <div class="col-sm-8">
                     <h5 class="card-title mb-2"><a href="#" class="text-decoration-none">Cây và gió</a></h5>
